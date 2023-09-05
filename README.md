@@ -1,4 +1,7 @@
 # Ising-Model
+###### For the graduate statistical mechanics course taught by [Professor Martin Grant](http://www.physics.mcgill.ca/~grant/) at [McGill University](https://www.mcgill.ca/).
+
+![alt text](https://github.com/IsolatedSingularity/Ising-Model/blob/main/Plots/CaptureII.PNG)
 
 ## Objective
 
