@@ -1,4 +1,4 @@
-﻿#%% Importing Modules
+# %% Importing Modules
 import os
 import random as rd
 
@@ -7,46 +7,50 @@ import numpy as np
 from cycler import cycler
 from matplotlib.colors import LinearSegmentedColormap
 
-#%% Tokyo Night Storm Theme
+# %% Tokyo Night Storm Theme
 PALETTE = {
-    "bg":     "#1a1b26",
-    "panel":  "#24283b",
-    "fg":     "#c0caf5",
-    "muted":  "#a9b1d6",
+    "bg": "#1a1b26",
+    "panel": "#24283b",
+    "fg": "#c0caf5",
+    "muted": "#a9b1d6",
     "subtle": "#565f89",
-    "blue":   "#7aa2f7",
-    "cyan":   "#7dcfff",
+    "blue": "#7aa2f7",
+    "cyan": "#7dcfff",
     "purple": "#bb9af7",
-    "red":    "#f7768e",
-    "green":  "#9ece6a",
+    "red": "#f7768e",
+    "green": "#9ece6a",
     "yellow": "#e0af68",
     "orange": "#ff9e64",
 }
 CYCLE = [PALETTE[k] for k in ("blue", "cyan", "purple", "red", "green", "yellow", "orange")]
 
+
 def applyTokyoNight():
     """Apply Tokyo Night Storm dark theme to all subsequent matplotlib figures."""
     import matplotlib as mpl
-    mpl.rcParams.update({
-        "figure.facecolor":  PALETTE["bg"],
-        "axes.facecolor":    PALETTE["bg"],
-        "savefig.facecolor": PALETTE["bg"],
-        "axes.edgecolor":    PALETTE["subtle"],
-        "axes.labelcolor":   PALETTE["fg"],
-        "axes.titlecolor":   PALETTE["fg"],
-        "xtick.color":       PALETTE["muted"],
-        "ytick.color":       PALETTE["muted"],
-        "text.color":        PALETTE["fg"],
-        "grid.color":        PALETTE["subtle"],
-        "grid.linestyle":    "--",
-        "grid.alpha":        0.4,
-        "axes.prop_cycle":   cycler(color=CYCLE),
-        "legend.facecolor":  PALETTE["panel"],
-        "legend.edgecolor":  PALETTE["subtle"],
-        "legend.labelcolor": PALETTE["fg"],
-        "font.family":       "sans-serif",
-        "font.size":         10,
-    })
+
+    mpl.rcParams.update(
+        {
+            "figure.facecolor": PALETTE["bg"],
+            "axes.facecolor": PALETTE["bg"],
+            "savefig.facecolor": PALETTE["bg"],
+            "axes.edgecolor": PALETTE["subtle"],
+            "axes.labelcolor": PALETTE["fg"],
+            "axes.titlecolor": PALETTE["fg"],
+            "xtick.color": PALETTE["muted"],
+            "ytick.color": PALETTE["muted"],
+            "text.color": PALETTE["fg"],
+            "grid.color": PALETTE["subtle"],
+            "grid.linestyle": "--",
+            "grid.alpha": 0.4,
+            "axes.prop_cycle": cycler(color=CYCLE),
+            "legend.facecolor": PALETTE["panel"],
+            "legend.edgecolor": PALETTE["subtle"],
+            "legend.labelcolor": PALETTE["fg"],
+            "font.family": "sans-serif",
+            "font.size": 10,
+        }
+    )
 
 
 # Custom spin colormap: spin-down = blue, spin-up = red
@@ -58,6 +62,7 @@ SPIN_CMAP = LinearSegmentedColormap.from_list(
 
 
 # â”€â”€ Ising Lattice â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
 
 class IsingLattice:
     """
@@ -82,7 +87,7 @@ class IsingLattice:
     T    : temperature in units of J / k_B
     """
 
-    CRIT_TEMP = 2.269   # Onsager solution
+    CRIT_TEMP = 2.269  # Onsager solution
 
     def __init__(self, size, T):
         self.size = size
@@ -102,11 +107,15 @@ class IsingLattice:
             i = rd.randint(0, size - 1)
             j = rd.randint(0, size - 1)
             S = lat[i, j]
-            dE = 2 * S * (
-                lat[(i - 1) % size, j]
-                + lat[(i + 1) % size, j]
-                + lat[i, (j - 1) % size]
-                + lat[i, (j + 1) % size]
+            dE = (
+                2
+                * S
+                * (
+                    lat[(i - 1) % size, j]
+                    + lat[(i + 1) % size, j]
+                    + lat[i, (j - 1) % size]
+                    + lat[i, (j + 1) % size]
+                )
             )
             if dE <= 0 or rd.random() < np.exp(-dE / T):
                 lat[i, j] = -S
@@ -125,7 +134,9 @@ class IsingLattice:
             j = rd.randint(0, size - 1)
             S = lat[i, j]
             dE = (
-                2 * S * (
+                2
+                * S
+                * (
                     lat[(i - 1) % size, j]
                     + lat[(i + 1) % size, j]
                     + lat[i, (j - 1) % size]
@@ -159,6 +170,7 @@ class IsingLattice:
 
 # â”€â”€ Phase Diagram â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+
 class PhaseDiagram:
     """
     Equilibrium magnetization <|m|>(T) and susceptibility chi(T) for multiple
@@ -182,8 +194,8 @@ class PhaseDiagram:
         self.temperatures = temperatures
         self.eqSteps = eqSteps
         self.measSteps = measSteps
-        self.mag = {}   # size -> ndarray(len(temperatures),)
-        self.chi = {}   # size -> ndarray(len(temperatures),)
+        self.mag = {}  # size -> ndarray(len(temperatures),)
+        self.chi = {}  # size -> ndarray(len(temperatures),)
 
     def compute(self):
         """Run the full sweep for each (size, T) combination."""
@@ -196,7 +208,7 @@ class PhaseDiagram:
                 lat.equilibrate(self.eqSteps)
                 samples = lat.measure(self.measSteps)
                 magArr[tIdx] = samples.mean()
-                chiArr[tIdx] = (size ** 2) * samples.var()
+                chiArr[tIdx] = (size**2) * samples.var()
             self.mag[size] = magArr
             self.chi[size] = chiArr
             print(f"  done size={size}")
@@ -204,6 +216,7 @@ class PhaseDiagram:
 
 
 # â”€â”€ Finite-Size Scaling â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
 
 class FiniteSizeScaling:
     """
@@ -224,8 +237,8 @@ class FiniteSizeScaling:
 
     def __init__(self, phaseDiagram):
         self.pd = phaseDiagram
-        self.peakTemp = {}    # size -> float
-        self.peakChi = {}     # size -> float
+        self.peakTemp = {}  # size -> float
+        self.peakChi = {}  # size -> float
         self.slope = None
         self.intercept = None
 
@@ -250,6 +263,7 @@ class FiniteSizeScaling:
 
 # â”€â”€ Hysteresis Loop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+
 class HysteresisLoop:
     """
     Magnetic hysteresis loop m(H) at a fixed sub-critical temperature.
@@ -270,10 +284,7 @@ class HysteresisLoop:
     def __init__(self, size=40, T=1.8, fieldValues=None, nRelaxSweeps=80):
         self.size = size
         self.T = T
-        self.fieldValues = (
-            fieldValues if fieldValues is not None
-            else np.linspace(-2.0, 2.0, 40)
-        )
+        self.fieldValues = fieldValues if fieldValues is not None else np.linspace(-2.0, 2.0, 40)
         self.nRelaxSweeps = nRelaxSweeps
         self.fieldSweep = None
         self.magnetization = None
@@ -293,6 +304,7 @@ class HysteresisLoop:
 
 
 # â”€â”€ Visualizer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
 
 class IsingVisualizer:
     """
@@ -322,8 +334,9 @@ class IsingVisualizer:
         fig.suptitle("Ising Lattice Configurations", fontsize=15)
 
         for ax, lat, lbl in zip(axes, lattices, labels):
-            im = ax.imshow(lat, cmap=self.spinCmap, vmin=-1, vmax=1,
-                           interpolation="nearest", aspect="equal")
+            im = ax.imshow(
+                lat, cmap=self.spinCmap, vmin=-1, vmax=1, interpolation="nearest", aspect="equal"
+            )
             ax.set_title(lbl, fontsize=12)
             ax.set_xticks([])
             ax.set_yticks([])
@@ -353,8 +366,13 @@ class IsingVisualizer:
             ax2.plot(pd.temperatures, pd.chi[size], color=col, linewidth=2, label=lbl)
 
         for ax in (ax1, ax2):
-            ax.axvline(IsingLattice.CRIT_TEMP, color=p["red"], linewidth=1.5,
-                       linestyle="--", label=r"$T_c = 2.269$")
+            ax.axvline(
+                IsingLattice.CRIT_TEMP,
+                color=p["red"],
+                linewidth=1.5,
+                linestyle="--",
+                label=r"$T_c = 2.269$",
+            )
             ax.legend()
             ax.grid(True)
 
@@ -383,22 +401,40 @@ class IsingVisualizer:
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
         fig.suptitle("Finite-Size Scaling of the Susceptibility Peak", fontsize=15)
 
-        ax1.plot(sizes, peakTemps, "o-", color=p["cyan"], linewidth=2, markersize=7,
-                 label="Simulated $T^*(N)$")
-        ax1.axhline(IsingLattice.CRIT_TEMP, color=p["red"], linewidth=1.5,
-                    linestyle="--", label=r"$T_c^\infty = 2.269$")
+        ax1.plot(
+            sizes,
+            peakTemps,
+            "o-",
+            color=p["cyan"],
+            linewidth=2,
+            markersize=7,
+            label="Simulated $T^*(N)$",
+        )
+        ax1.axhline(
+            IsingLattice.CRIT_TEMP,
+            color=p["red"],
+            linewidth=1.5,
+            linestyle="--",
+            label=r"$T_c^\infty = 2.269$",
+        )
         ax1.set_title(r"Peak Location  $T^*(N) \to T_c^\infty$")
         ax1.set_xlabel("System size $N$")
         ax1.set_ylabel(r"$T^*(N)$")
         ax1.legend()
         ax1.grid(True)
 
-        ax2.loglog(sizes, peakChis, "o", color=p["purple"], markersize=8,
-                   label="Simulated $\\chi_{\\max}$")
+        ax2.loglog(
+            sizes, peakChis, "o", color=p["purple"], markersize=8, label="Simulated $\\chi_{\\max}$"
+        )
         NLine = np.linspace(sizes.min(), sizes.max(), 200)
-        ax2.loglog(NLine, np.exp(fss.intercept) * NLine ** fss.slope,
-                   color=p["yellow"], linewidth=2, linestyle="--",
-                   label=f"fit  $\\gamma/\\nu \\approx {fss.slope:.2f}$  (exact = 1.75)")
+        ax2.loglog(
+            NLine,
+            np.exp(fss.intercept) * NLine**fss.slope,
+            color=p["yellow"],
+            linewidth=2,
+            linestyle="--",
+            label=f"fit  $\\gamma/\\nu \\approx {fss.slope:.2f}$  (exact = 1.75)",
+        )
         ax2.set_title(r"Peak Height  $\chi_\mathrm{max}(N) \sim N^{\gamma/\nu}$")
         ax2.set_xlabel("System size $N$")
         ax2.set_ylabel(r"$\chi_\mathrm{max}$")
@@ -422,12 +458,25 @@ class IsingVisualizer:
             fontsize=15,
         )
 
-        ax.plot(hyst.fieldSweep[:halfIdx], hyst.magnetization[:halfIdx],
-                color=p["blue"], linewidth=2.5, marker="o", markersize=3,
-                label="Field increasing")
-        ax.plot(hyst.fieldSweep[halfIdx:], hyst.magnetization[halfIdx:],
-                color=p["red"], linewidth=2.5, marker="o", markersize=3,
-                linestyle="--", label="Field decreasing")
+        ax.plot(
+            hyst.fieldSweep[:halfIdx],
+            hyst.magnetization[:halfIdx],
+            color=p["blue"],
+            linewidth=2.5,
+            marker="o",
+            markersize=3,
+            label="Field increasing",
+        )
+        ax.plot(
+            hyst.fieldSweep[halfIdx:],
+            hyst.magnetization[halfIdx:],
+            color=p["red"],
+            linewidth=2.5,
+            marker="o",
+            markersize=3,
+            linestyle="--",
+            label="Field decreasing",
+        )
 
         ax.axhline(0, color=p["subtle"], linewidth=1, linestyle=":")
         ax.axvline(0, color=p["subtle"], linewidth=1, linestyle=":")
@@ -481,7 +530,8 @@ if __name__ == "__main__":
 
     # Hysteresis loop
     hyst = HysteresisLoop(
-        size=40, T=1.8,
+        size=40,
+        T=1.8,
         fieldValues=np.linspace(-2.0, 2.0, 40),
         nRelaxSweeps=80,
     )
@@ -499,6 +549,3 @@ if __name__ == "__main__":
     viz.plotHysteresis(hyst)
 
     print("Done.")
-
-
-

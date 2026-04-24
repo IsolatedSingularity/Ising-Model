@@ -1,10 +1,10 @@
 # 2D Ising Model
 
 [![CI](https://img.shields.io/github/actions/workflow/status/IsolatedSingularity/Ising-Model/ci.yml?branch=main&label=CI&logo=github)](https://github.com/IsolatedSingularity/Ising-Model/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![NumPy](https://img.shields.io/badge/numpy-darkblue.svg?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
-[![SciPy](https://img.shields.io/badge/scipy-8CAAE6.svg?style=for-the-badge&logo=scipy&logoColor=white)](https://scipy.org/)
-[![Matplotlib](https://img.shields.io/badge/matplotlib-11557C.svg?style=for-the-badge)](https://matplotlib.org/)
+[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![NumPy](https://img.shields.io/badge/numpy-darkblue.svg?logo=numpy&logoColor=white)](https://numpy.org/)
+[![SciPy](https://img.shields.io/badge/scipy-8CAAE6.svg?logo=scipy&logoColor=white)](https://scipy.org/)
+[![Matplotlib](https://img.shields.io/badge/matplotlib-11557C.svg)](https://matplotlib.org/)
 
 ###### For the graduate statistical mechanics course taught by [Professor Martin Grant](http://www.physics.mcgill.ca/~grant/) at [McGill University](https://www.mcgill.ca/).
 
