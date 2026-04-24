@@ -1,6 +1,7 @@
 # 2D Ising Model
 
-[![Python](https://img.shields.io/badge/python-3.8%2B-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![CI](https://img.shields.io/github/actions/workflow/status/IsolatedSingularity/Ising-Model/ci.yml?branch=main&label=CI&logo=github)](https://github.com/IsolatedSingularity/Ising-Model/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.10%2B-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/numpy-darkblue.svg?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
 [![SciPy](https://img.shields.io/badge/scipy-8CAAE6.svg?style=for-the-badge&logo=scipy&logoColor=white)](https://scipy.org/)
 [![Matplotlib](https://img.shields.io/badge/matplotlib-11557C.svg?style=for-the-badge)](https://matplotlib.org/)
@@ -101,6 +102,22 @@ Both scripts print and plot two outputs at the end of execution:
 - **Phase diagram**: equilibrium magnetization $\langle m \rangle$ and susceptibility $\chi$ vs temperature for multiple lattice sizes
 - **Finite-size scaling**: collapse of $\chi$ curves onto a universal scaling function to extract $\nu$ and the true $T_c(N \to \infty)$
 - **External field sweep**: hysteresis loop $m(H)$ at sub-critical temperature
+
+<p align="center">
+  <img src="Plots/ising_snapshots.jpg" alt="Ising lattice configurations at three temperatures" width="900">
+</p>
+
+<p align="center">
+  <img src="Plots/ising_phase_diagram.jpg" alt="Phase diagram: magnetization and susceptibility" width="900">
+</p>
+
+<p align="center">
+  <img src="Plots/ising_fss.jpg" alt="Finite-size scaling of susceptibility peak" width="900">
+</p>
+
+<p align="center">
+  <img src="Plots/ising_hysteresis.jpg" alt="Magnetic hysteresis loop" width="700">
+</p>
 
 ---
 
